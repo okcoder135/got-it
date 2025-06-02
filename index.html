@@ -21,10 +21,10 @@
 <body>
   <h1>👀 Hello, Penne!</h1>
   <div class="box">
-    <p><strong>Your IP:</strong> <span id="ip"></span></p>
-    <p><strong>Your Location:</strong> <span id="loc"></span></p>
-    <p><strong>Your OS:</strong> <span id="os"></span></p>
-    <p><strong>Your Browser:</strong> <span id="browser"></span></p>
+    <p><strong>Your IP:</strong> <span id="ip">Loading...</span></p>
+    <p><strong>Your Location:</strong> <span id="loc">Loading...</span></p>
+    <p><strong>Your OS:</strong> <span id="os">Loading...</span></p>
+    <p><strong>Your Browser:</strong> <span id="browser">Loading...</span></p>
   </div>
 
   <script>
@@ -33,6 +33,10 @@
       .then(data => {
         document.getElementById("ip").textContent = data.ip;
         document.getElementById("loc").textContent = data.city + ", " + data.region + ", " + data.country_name;
+      })
+      .catch(() => {
+        document.getElementById("ip").textContent = "Unable to get IP";
+        document.getElementById("loc").textContent = "Unable to get location";
       });
 
     const os = navigator.platform || "Unknown";
@@ -47,3 +51,4 @@
   </p>
 </body>
 </html>
+
