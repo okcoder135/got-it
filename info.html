@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Info Page</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #121212;
+      color: #ffffff;
+      text-align: center;
+      padding: 40px;
+    }
+    .box {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>👀 Hello, visitor!</h1>
+  <div class="box">
+    <p><strong>Your IP:</strong> <span id="ip"></span></p>
+    <p><strong>Your Location:</strong> <span id="loc"></span></p>
+    <p><strong>Your OS:</strong> <span id="os"></span></p>
+    <p><strong>Your Browser:</strong> <span id="browser"></span></p>
+  </div>
+
+  <script>
+    fetch("https://ipapi.co/json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("ip").textContent = data.ip;
+        document.getElementById("loc").textContent = data.city + ", " + data.region + ", " + data.country_name;
+      });
+
+    const os = navigator.platform || "Unknown";
+    document.getElementById("os").textContent = os;
+
+    const browser = navigator.userAgent;
+    document.getElementById("browser").textContent = browser;
+  </script>
+
+  <p style="font-size: 12px; color: gray;">
+    This page shows public info like your IP and browser for fun. Nothing private is collected or stored.
+  </p>
+</body>
+</html>
